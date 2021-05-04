@@ -37,7 +37,7 @@ function setup() {
     bg.scale = 5;
     bg.visible = true;
 
-    police = createSprite(167,100);
+    police = createSprite(130,100);
     police.addImage(policeImg);
     police.scale = 0.8;
     police.visible = true;
@@ -105,20 +105,25 @@ function draw() {
 
       bg.visble = false;
     winner.visible = true;
-        zombie.destroy();
-        bullet.destroy();
+    zombies.destroyEach();
+    Bullets.destroyEach();
         police.visible = false;
       }
       police.y = World.mouseY;
 
     }else if(gameState === END) {
+      strokeWeight(6);
+      stroke("black");
+      fill("green");
+      textSize(50);
+      text("press resart button to play once more",400,600);
         bg.visible = false;
         lose.visible = true;
         restart.visible = true;
         bgsound.stop();
         gunsound.stop();
-        zombie.destroy();
-        bullet.destroy();
+        zombies.destroyEach();
+        Bullets.destroyEach();
         police.visible = false;
 
         if(mousePressedOver(restart)) {
@@ -136,6 +141,7 @@ function draw() {
 
   function reset(){
     gameState = PLAY;
+    bgsound.play();
     bg.visible = true;
     winner.visible = false;
     lose.visible = false;
@@ -147,7 +153,7 @@ function draw() {
   }
 
 function createBullet() {
-  bullet = createSprite(311,97);
+  bullet = createSprite(270,97);
   bullet.addImage(bulletImg);
   bullet.velocityX = 90
   bullet.scale = 0.1
